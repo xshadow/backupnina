@@ -59,7 +59,13 @@ version 1.0.2  -- UNRELEASED
 	   Thanks to Mark Janssen <mark@sig-io.nl> for the patch.
     documentation changes
 	 . Update INSTALL file to add some missing recommended programs.
-
+	configuration changes
+	syslog:
+	. added possibility of logging to syslog with a facility
+	configuration changes
+	logtosyslog:
+	. added possibility of logging to syslog
+	  
 version 1.0.1 -- June 29, 2012
     handler changes
 	rsync:

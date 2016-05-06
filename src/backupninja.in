@@ -98,8 +98,30 @@ function printmsg() {
 }
 
 function logmsg() {
-   if [ -w "$logfile" ]; then
-      echo -e `LC_ALL=C date "+%h %d %H:%M:%S"` "$@" >> $logfile
+
+   if [ "$syslog" == "yes" ]; then
+        if [ "$loglevel" == "5" ]; then
+            echo -e "$@" 2>&1 | logger -s -i -t backupninja -p "$syslog_facility".debug &>/dev/null
+        fi
+
+        if [ "$loglevel" == "4" ]; then
+            echo -e "$@" 2>&1 | logger -s -i -t backupninja -p "$syslog_facility".info &>/dev/null
+        fi
+
+        if [ "$loglevel" == "3" ]; then
+           echo -e "$@" 2>&1 | logger -s -i -t backupninja -p "$syslog_facility".warning &>/dev/null
+        fi
+
+        if [ "$loglevel" == "2" ]; then
+           echo -e "$@" 2>&1 | logger -s -i -t backupninja -p "$syslog_facility".err &>/dev/null
+        fi
+
+        if [ "$loglevel" == "1" ]; then
+              echo -e "$@" 2>&1 | logger -s -i -t backupninja -p "$syslog_facility".crit &>/dev/null
+        fi
+
+   elif [ -w "$logfile" ]
+         echo -e `LC_ALL=C date "+%h %d %H:%M:%S"` "$@" >> $logfile
    fi
 }
 
@@ -491,6 +513,8 @@ getconf reportwarning yes
 getconf loglevel 3
 getconf when "Everyday at 01:00"
 defaultwhen=$when
+getconf syslog no
+getconf syslog_facility user
 getconf logfile @localstatedir@/log/backupninja.log
 getconf usecolors "yes"
 getconf SLAPCAT /usr/sbin/slapcat

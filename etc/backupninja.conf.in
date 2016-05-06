@@ -54,6 +54,18 @@ admingroup = root
 # for most installations, the defaults below are good #
 #######################################################
 
+# if you want backupninja to log to syslog
+# set to yes, logfile location will be ignored
+syslog = no
+
+# you can set the syslog facilities to allowed values
+# https://en.wikipedia.org/wiki/Syslog#Facility_levels
+syslog_facility = user
+
+# if you want backupninja to log to syslog
+# set to yes, logfile location will be ignored
+logtosyslog = no
+
 # where to log:
 logfile = @localstatedir@/log/backupninja.log
 
