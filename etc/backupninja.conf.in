@@ -62,10 +62,6 @@ syslog = no
 # https://en.wikipedia.org/wiki/Syslog#Facility_levels
 syslog_facility = user
 
-# if you want backupninja to log to syslog
-# set to yes, logfile location will be ignored
-logtosyslog = no
-
 # where to log:
 logfile = @localstatedir@/log/backupninja.log
 
